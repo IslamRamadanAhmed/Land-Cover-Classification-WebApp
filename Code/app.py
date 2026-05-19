@@ -502,7 +502,7 @@ def process_image():
         # STEP 7: Load trained model
         # ============================================================
         print("\n[STEP 7] Loading trained model...")
-        model_path = app.config.get('MODEL_PATH') or os.path.join(os.path.dirname(__file__), '..', 'Outputs', 'best_model.pkl')
+        model_path = app.config.get('MODEL_PATH') or os.path.join(os.path.dirname(__file__), '..', 'Model', 'best_model.pkl')
         if not os.path.exists(model_path):
             return jsonify({'error': 'Trained model not found. Please run training first.'}), 500
         

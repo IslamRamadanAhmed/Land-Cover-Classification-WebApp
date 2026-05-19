@@ -300,7 +300,7 @@ app.run(debug=True, host='0.0.0.0', port=5001)  # Change to 5001
 **Batch 2026 | Group 8**
 
 ### Team Members:
-- **Islam Ramadan** (Lead Developer)
+- **Islam Ramadan** 
 - **Hazem Nasr**
 - **Yahia Mohamed**
 - **Hassan Maher**
