@@ -34,8 +34,10 @@ A professional **web-based** application that automates the complete remote sens
 Download your Landsat 8 scene from: [earthexplorer.usgs.gov](https://earthexplorer.usgs.gov/)
 
 Required files:
-- ✅ 10 Spectral Bands: `B1.TIF` - `B10.TIF` (GeoTIFF format)
+- ✅ 7 Spectral Bands: `B1.TIF` - `B7.TIF` (GeoTIFF format)
 - ✅ Metadata File: `*_MTL.txt` (contains calibration coefficients)
+
+**Note**: While Landsat 8 provides 10 bands, this application uses B1-B7 calibrated to TOA reflectance, plus 3 computed spectral indices (NDVI, MNDWI, NDBI) for a total of 10 input features to the ML classifier.
 
 ### Pre-trained Model
 - ✅ `Outputs/best_model.pkl` - Random Forest classifier trained on 4 land cover classes
@@ -124,9 +126,10 @@ LC08_L1TP_177039_20250811_20250821_02_T1_MTL.txt
 
 ### 2. Upload to Web App
 
-1. **Select Bands**: Click on each band input and select the corresponding TIF file (B1-B10 in order)
+1. **Select Bands**: Click on each band input and select the corresponding TIF file (B1-B7 in order)
 2. **Select Metadata**: Choose the `*_MTL.txt` file
-3. **Process**: Click "🚀 Process Image"
+3. **Define Crop Window**: Enter row/column start and end indices (default: 1000-3000 for both)
+4. **Process**: Click "🚀 Process Image"
 
 ### 3. View Results
 
@@ -254,18 +257,29 @@ app.run(debug=True, host='0.0.0.0', port=5001)  # Change to 5001
 ## 🎓 Project Structure
 
 ```
-Code/
-├── app.py                          # Main Flask application
-├── requirements.txt                # Python package dependencies
-├── templates/
-│   └── index.html                 # Web interface (HTML)
-├── static/
-│   ├── style.css                  # Styling (CSS)
-│   └── script.js                  # Frontend interactivity (JavaScript)
-├── Model_Training/
-│   └── main.py                    # Train 6 classifiers, save best
-└── Model_Testing/
-    └── predict_new_image.py       # Single image prediction (legacy)
+8_ECE435_Project_2026/
+├── Code/
+│   ├── app.py                          # Main Flask application (Phase 3)
+│   ├── config.py                       # Flask configuration
+│   ├── requirements.txt                # Python package dependencies
+│   ├── templates/
+│   │   └── index.html                 # Web interface (HTML5)
+│   ├── static/
+│   │   ├── style.css                  # Styling (CSS3)
+│   │   └── script.js                  # Frontend logic (Vanilla JS)
+│   ├── Model_Training/
+│   │   └── main.py                    # Phase 1: Train 6 classifiers, save best
+│   └── Model_Testing/
+│       └── predict_new_image.py       # Phase 2: Single image inference (legacy)
+├── Data/
+│   └── Labeled_ROI.csv                # Training dataset (133,201 labeled pixels)
+├── Outputs/
+│   └── best_model.pkl                 # Pre-trained Random Forest model
+├── Documentation/
+├── README.md                           # Main documentation
+├── QUICK_START.md                      # Quick start guide
+├── START_HERE.md                       # First-time setup
+└── uploads/                            # Temporary session folders (auto-created)
 ```
 
 ---
@@ -284,6 +298,15 @@ Code/
 **ECE 435: Remote Sensing Course**  
 **Zagazig University - Faculty of Engineering**  
 **Batch 2026 | Group 8**
+
+### Team Members:
+- **Islam Ramadan** (Lead Developer)
+- **Hazem Nasr**
+- **Yahia Mohamed**
+- **Hassan Maher**
+- **Ahmed Hany**
+- **Osama Ashraf**
+- **Mohamed Elsayed**
 
 ---
 
